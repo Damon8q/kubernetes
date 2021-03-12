@@ -4192,6 +4192,11 @@ func (in *PreferredSchedulingTerm) DeepCopy() *PreferredSchedulingTerm {
 func (in *Probe) DeepCopyInto(out *Probe) {
 	*out = *in
 	in.Handler.DeepCopyInto(&out.Handler)
+	if in.TerminationGracePeriodSeconds != nil {
+		in, out := &in.TerminationGracePeriodSeconds, &out.TerminationGracePeriodSeconds
+		*out = new(int64)
+		**out = **in
+	}
 	return
 }
 
@@ -5328,6 +5333,16 @@ func (in *ServiceSpec) DeepCopyInto(out *ServiceSpec) {
 	if in.AllocateLoadBalancerNodePorts != nil {
 		in, out := &in.AllocateLoadBalancerNodePorts, &out.AllocateLoadBalancerNodePorts
 		*out = new(bool)
+		**out = **in
+	}
+	if in.LoadBalancerClass != nil {
+		in, out := &in.LoadBalancerClass, &out.LoadBalancerClass
+		*out = new(string)
+		**out = **in
+	}
+	if in.InternalTrafficPolicy != nil {
+		in, out := &in.InternalTrafficPolicy, &out.InternalTrafficPolicy
+		*out = new(ServiceInternalTrafficPolicyType)
 		**out = **in
 	}
 	return
